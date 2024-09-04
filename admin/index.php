@@ -1,3 +1,51 @@
+<?php
+session_start();
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "tugas2";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $admin_username = $_POST['username'];
+    $admin_password = $_POST['password'];
+
+    $sql = "SELECT * FROM admins WHERE username = ?";
+    $stmt = $conn->prepare($sql);
+
+    if ($stmt === false) {
+        die('Prepare failed: ' . htmlspecialchars($conn->error));
+    }
+
+    $stmt->bind_param('s', $admin_username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        
+        if (md5($admin_password) === $row['password']) {
+            $_SESSION['admin_logged_in'] = true;
+            header("Location: usersub.php");
+            exit();
+        } else {
+            $error = "Invalid username or password.";
+        }
+    } else {
+        $error = "Invalid username or password.";
+    }
+    $stmt->close();
+}
+
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
