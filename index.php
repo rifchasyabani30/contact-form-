@@ -1,3 +1,37 @@
+<?php
+$servername = "localhost";
+$username = "root"; 
+$password = ""; 
+$dbname = "tugas2";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$message = '';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
+    $nama = $conn->real_escape_string($_POST['Nama']);
+    $nim = $conn->real_escape_string($_POST['Nim']);
+    $email = $conn->real_escape_string($_POST['Email']);
+    $kelas = $conn->real_escape_string($_POST['Kelas']);
+    $gender = $conn->real_escape_string($_POST['Gender']); 
+    $saran = $conn->real_escape_string($_POST['Saran']);
+
+    $sql = "INSERT INTO user (Nama, Nim, Email, Kelas, Gender, Saran) VALUES ('$nama', '$nim', '$email', '$kelas', '$gender', '$saran')";
+
+    if ($conn->query($sql) === TRUE) {
+        $message = "Your submission was successful. Thank you for your input!";
+    } else {
+        $message = "Error: " . $sql . "<br>" . $conn->error;
+    }
+    $conn->close();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
