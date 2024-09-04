@@ -38,6 +38,96 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4, #fbc2eb, #a18cd1, #a18cd1, #cfd9df);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            border-radius: 30px; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 500px;
+            width: 90%;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"],
+        select,
+        textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-sizing: border-box;
+        }
+        textarea {
+            height: 100px;
+        }
+        input[type="submit"] {
+            background-color: #a18cd1;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px; 
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #fbc2eb;
+        }
+        .message {
+            padding: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 8px; 
+        }
+        .message.success {
+            color: #28a745; 
+        }
+        .message.error {
+            color: #dc3545; 
+        }
+        .gender-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .gender-container label {
+            margin-left: 5px;
+            margin-right: 20px;
+        }
+        .copyright {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            color: #fff;
+        }
+    </style>
+    <script>
+        function confirmSubmission() {
+            return confirm("Apakah Anda yakin ingin mengirim formulir ini?");
+        }
+    </script>
 </head>
 <body>
     <div class="container">
